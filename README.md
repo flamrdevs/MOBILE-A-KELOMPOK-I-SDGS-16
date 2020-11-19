@@ -1,16 +1,40 @@
-# tugas_app
+# PePerIA
 
-A new Flutter application.
+---
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+Aplikasi PePerIA ini adalah sebuah aplikasi mobile Pengajuan Perkara Pengadilan Agama yang digunakan untuk membantu masyarakat mempermudah
+mengurusi atau memproses perkara keadilan tentang agama. Contoh-contoh perkara yang dapat diatasi atau diurusi seperti surat perceraian,
+surat warisan, dispensasi nikah dan lain-lain. Sehingga kantor pengadilan secara otomatis mengatur jadwal untuk mengadili kapan
+masyarakat tersebut harus diadili. Dan sesuai hal apa yang dia laporkan
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Feature
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Fitur Home
+- Fitur About
+- Fitur Contact
+- Fitur Pengaduan/Layanan
+
+---
+
+## Progress
+
+| Date        | Do                            |
+| ----------- | ----------------------------- |
+| 21-Okt-2020 | Membuat Tampilan Nama Anggota |
+| 28-Okt-2020 | Membuat Route Sederhana       |
+
+---
+
+## Team
+
+| NIM          | Nama                     |
+| ------------ | ------------------------ |
+| 182410103002 | Yuli Puspita Dewi        |
+| 182410103012 | Muhammad Faisal Amruddin |
+| 182410103086 | Muhammad Izzat Rahman    |
+
+---
