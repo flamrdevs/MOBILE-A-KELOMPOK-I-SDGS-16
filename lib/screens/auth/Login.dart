@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_app/helpers/Routing.dart';
-// import 'package:tugas_app/auth/Register.dart';
+import 'package:tugas_app/screens/auth/Register.dart';
 import 'package:tugas_app/screens/home/Home.dart';
 
 class Login extends StatefulWidget {
@@ -53,7 +53,7 @@ class _LoginState extends State<Login> {
                 RaisedButton(
                   onPressed: () {
                     if (username == _username && password == _password) {
-                      Routing.to(context, Home());
+                      Routing.lto(context, Home());
                     } else {
                       setState(() {
                         _username = "";
@@ -66,7 +66,7 @@ class _LoginState extends State<Login> {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    Routing.to(context, Register());
+                    Routing.fto(context, Register());
                   },
                   child: Text("Daftar"),
                 ),

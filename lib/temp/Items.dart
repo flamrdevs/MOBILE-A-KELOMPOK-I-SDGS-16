@@ -17,7 +17,7 @@ class AppItems extends StatelessWidget {
               leading: FlutterLogo(size: 24.0),
               title: Text('Item ${i + 1}'),
               onTap: () {
-                Routing.to(context, AppItemDetail(itemid: i + 1));
+                // Routing.to(context, AppItemDetail(itemid: i + 1));
               },
             ),
           );

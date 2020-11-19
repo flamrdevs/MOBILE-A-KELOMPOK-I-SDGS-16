@@ -70,19 +70,19 @@ class AppHome extends StatelessWidget {
         children: <Widget>[
           RaisedButton(
             onPressed: () {
-              Routing.to(context, AppAbout());
+              // Routing.to(context, AppAbout());
             },
             child: const Text('About'),
           ),
           RaisedButton(
             onPressed: () {
-              Routing.to(context, AppContact());
+              // Routing.to(context, AppContact());
             },
             child: const Text('Contact'),
           ),
           RaisedButton(
             onPressed: () {
-              Routing.to(context, AppItems());
+              // Routing.to(context, AppItems());
             },
             child: const Text('Items'),
           ),

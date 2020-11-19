@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:tugas_app/screens/auth/Login.dart';
+import 'package:tugas_app/helpers/Routing.dart';
+import 'package:tugas_app/screens/auth/Login.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -12,6 +13,22 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Daftar'),
+      ),
+      body: Container(
+        child: ListView(
+          children: <Widget>[
+            Center(
+              child: Column(children: <Widget>[
+                RaisedButton(
+                  onPressed: () {
+                    Routing.fto(context, Login());
+                  },
+                  child: Text("Masuk"),
+                ),
+              ]),
+            ),
+          ],
+        ),
       ),
     );
   }
