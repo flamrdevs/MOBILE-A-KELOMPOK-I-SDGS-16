@@ -5,7 +5,7 @@ class Config {
 }
 
 class ColorPallete {
-  static const primaryColor = Color(0xff5364e8);
+  static const primaryColor = Color(0xff42a5f5);
   static const secondaryColor = Color(0xff9e9e9e);
   static const successColor = Color(0xff00c853);
   static const warningColor = Color(0xffffd600);

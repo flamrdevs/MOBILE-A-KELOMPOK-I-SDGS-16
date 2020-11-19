@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:tugas_app/helpers/Routing.dart';
+
 import 'package:tugas_app/screens/auth/Register.dart';
 import 'package:tugas_app/screens/home/Home.dart';
 
@@ -9,15 +11,16 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  // validAuth
-  var _username = "Username";
-  var _password = "Password";
+  String validUsername = "Username";
+  String validPassword = "Password";
 
-  var _loginFallback = false;
+  String message = "";
+  var isError = false;
 
-  // userInput
-  var username = "";
-  var password = "";
+  TextEditingController usernameController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
+  final _loginFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,56 +28,99 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         title: Text('Masuk'),
       ),
-      body: Container(
-        child: ListView(
-          children: <Widget>[
-            Center(
-              child: Column(children: <Widget>[
-                if (_loginFallback) Text('Username atau password salah'),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    hintText: "Username",
-                  ),
-                  style: TextStyle(color: Colors.white),
-                  autofocus: false,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 12.0),
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    hintText: "Password",
-                  ),
-                  style: TextStyle(color: Colors.white),
-                  autofocus: false,
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    if (username == _username && password == _password) {
-                      Routing.lto(context, Home());
-                    } else {
-                      setState(() {
-                        _username = "";
-                        _password = "";
-                        _loginFallback = true;
-                      });
-                    }
-                  },
-                  child: Text("Masuk"),
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    Routing.fto(context, Register());
-                  },
-                  child: Text("Daftar"),
-                ),
-              ]),
-            ),
-          ],
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _loginForm(),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Widget _loginForm() {
+    return Form(
+        key: _loginFormKey,
+        child: Column(
+          children: <Widget>[
+            if (isError)
+              Text(
+                message,
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            if (isError) SizedBox(height: 12),
+            TextFormField(
+              decoration: InputDecoration(
+                icon: Icon(Icons.person),
+                hintText: 'Username... (use "Username")',
+              ),
+              controller: usernameController,
+              validator: (value) {
+                return value.isEmpty ? 'Username tidak boleh kosong' : null;
+              },
+            ),
+            SizedBox(height: 12),
+            TextFormField(
+              obscureText: true,
+              decoration: InputDecoration(
+                icon: Icon(Icons.lock),
+                hintText: 'Password... (use "Password")',
+              ),
+              controller: passwordController,
+              validator: (value) {
+                return value.isEmpty ? 'Password tidak boleh kosong' : null;
+              },
+            ),
+            SizedBox(height: 24),
+            RaisedButton(
+              onPressed: () {
+                if (_loginFormKey.currentState.validate()) {
+                  if (usernameController.text.toString() == validUsername) {
+                    if (passwordController.text.toString() == validPassword) {
+                      clearController();
+                      setState(() {
+                        message = "";
+                        isError = false;
+                      });
+                      Routing.lto(context, Home());
+                    } else {
+                      setState(() {
+                        message = 'Username atau Password salah';
+                        isError = true;
+                      });
+                    }
+                  } else {
+                    setState(() {
+                      message = 'Username tidak ditemukan';
+                      isError = true;
+                    });
+                  }
+                }
+              },
+              child: Text('Masuk'),
+            ),
+            SizedBox(height: 8),
+            Text("Atau"),
+            SizedBox(height: 8),
+            RaisedButton(
+              onPressed: () {
+                clearController();
+                Routing.fto(context, Register());
+              },
+              child: Text('Daftar'),
+            )
+          ],
+        ));
+  }
+
+  void clearController() {
+    usernameController.clear();
+    passwordController.clear();
   }
 }
