@@ -5,6 +5,8 @@ import 'package:tugas_app/models/ScheduleModel.dart';
 import 'package:tugas_app/core/DateFormat.dart';
 import 'package:tugas_app/screens/home/ScheduleDetail.dart';
 
+import 'package:http/http.dart' as http;
+
 class Schedule extends StatefulWidget {
   static const path = '/schedule';
 
@@ -13,7 +15,7 @@ class Schedule extends StatefulWidget {
 }
 
 class _ScheduleState extends State<Schedule> {
-  final fakeSchedule = ScheduleModel.all();
+  final snapshotSchedule = ScheduleModel.all();
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +38,9 @@ class _ScheduleState extends State<Schedule> {
                 DataColumn(label: Text('Ruang')),
               ],
               rows: List<DataRow>.generate(
-                fakeSchedule.length,
+                snapshotSchedule.length,
                 (i) {
-                  final ScheduleModel s = fakeSchedule[i];
+                  final s = snapshotSchedule[i];
                   return DataRow(
                       onSelectChanged: (bool selected) {
                         if (selected) {

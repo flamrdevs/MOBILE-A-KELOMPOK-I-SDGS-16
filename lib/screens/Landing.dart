@@ -36,15 +36,15 @@ class Landing extends StatelessWidget {
                 child: Text('Register'),
               ),
             ),
-            // Padding(
-            //   padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-            //   child: ElevatedButton(
-            //     onPressed: () {
-            //       Navigator.pushReplacementNamed(context, Home.path);
-            //     },
-            //     child: Text('Home'),
-            //   ),
-            // ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, Home.path);
+                },
+                child: Text('Home'),
+              ),
+            ),
           ],
         ),
       ),
