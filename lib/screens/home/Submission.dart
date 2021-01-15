@@ -1,91 +1,60 @@
 import 'package:flutter/material.dart';
 
-import 'package:tugas_app/helpers/Routing.dart';
-
 class Submission extends StatefulWidget {
+  static const path = '/submission';
+
   @override
   _SubmissionState createState() => _SubmissionState();
 }
 
 class _SubmissionState extends State<Submission> {
-  String pesan = "";
+  final _formKey = GlobalKey<FormState>();
 
-  String message = "";
-  var isSuccess = false;
+  final TextEditingController _messageController = new TextEditingController();
 
-  TextEditingController messageController = new TextEditingController();
-
-  final _loginFormKey = GlobalKey<FormState>();
+  @override
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pengajuan'),
+        title: Text("Submission"),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        child: _submissionForm(),
-      ),
-    );
-  }
-
-  Widget _submissionForm() {
-    return Form(
-        key: _loginFormKey,
-        child: Column(
-          children: <Widget>[
-            if (isSuccess)
-              Text(
-                message,
-                style: TextStyle(
-                  color: Colors.green,
-                ),
-              ),
-            if (isSuccess) SizedBox(height: 12),
-            if (isSuccess)
-              RaisedButton(
-                onPressed: () {
-                  Routing.clear(context);
-                },
-                child: Text('Kembali'),
-              ),
-            if (!isSuccess)
+      body: Container(
+        padding: EdgeInsets.all(20.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 15),
               TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Pesan....',
-                ),
-                controller: messageController,
+                decoration: InputDecoration(labelText: "Pesan pengajuan"),
+                controller: _messageController,
                 validator: (value) {
                   return value.isEmpty ? 'Pesan tidak boleh kosong' : null;
                 },
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
-            if (!isSuccess) SizedBox(height: 24),
-            if (!isSuccess)
-              RaisedButton(
+              SizedBox(height: 20),
+              ElevatedButton(
                 onPressed: () {
-                  if (_loginFormKey.currentState.validate()) {
-                    setState(() {
-                      message = "pengajuan berhasil dikirim";
-                      isSuccess = true;
-                    });
-                    clearController();
-                  } else {
-                    setState(() {
-                      message = "";
-                      isSuccess = false;
-                    });
+                  final _message = _messageController.text.toString();
+
+                  if (_formKey.currentState.validate()) {
+                    print(_message);
                   }
                 },
                 child: Text('Ajukan'),
               ),
-          ],
-        ));
-  }
-
-  void clearController() {
-    messageController.clear();
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

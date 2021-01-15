@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "caseId": "kasusno1",
+    "startDate": "2020-12-23 09:00:00",
+    "endDate": "2020-12-23 10:00:00",
+    "typeOfCase": "jeniskasus1",
+    "room": "1",
+    "agenda": "agenda1"
+  },
+  {
+    "id": "2",
+    "caseId": "kasusno2",
+    "startDate": "2020-12-23 09:00:00",
+    "endDate": "2020-12-23 10:00:00",
+    "typeOfCase": "jeniskasus2",
+    "room": "2",
+    "agenda": "agenda2"
+  },
+  {
+    "id": "3",
+    "caseId": "kasusno3",
+    "startDate": "2020-12-23 09:00:00",
+    "endDate": "2020-12-23 10:00:00",
+    "typeOfCase": "jeniskasus3",
+    "room": "3",
+    "agenda": "agenda2"
+  },
+  {
+    "id": "4",
+    "caseId": "kasusno4",
+    "startDate": "2020-12-23 09:00:00",
+    "endDate": "2020-12-23 10:00:00",
+    "typeOfCase": "jeniskasus4",
+    "room": "4",
+    "agenda": "agenda4"
+  }
+]

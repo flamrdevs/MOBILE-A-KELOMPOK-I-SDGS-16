@@ -1,47 +1,61 @@
 import 'package:flutter/material.dart';
 
-class Schedule extends StatelessWidget {
+import 'package:tugas_app/models/ScheduleModel.dart';
+
+import 'package:tugas_app/core/DateFormat.dart';
+import 'package:tugas_app/screens/home/ScheduleDetail.dart';
+
+class Schedule extends StatefulWidget {
+  static const path = '/schedule';
+
+  @override
+  _ScheduleState createState() => _ScheduleState();
+}
+
+class _ScheduleState extends State<Schedule> {
+  final fakeSchedule = ScheduleModel.all();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jadwal'),
+        title: Text("Schedule"),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        child: ListView(
-          children: <Widget>[
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                      title: Text('Jadwal 1'),
-                      subtitle: Text('30 November 2020')),
-                ],
+      body: Container(
+        padding: EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              showCheckboxColumn: false,
+              columns: <DataColumn>[
+                DataColumn(label: Text('No')),
+                DataColumn(label: Text('Tanggal')),
+                DataColumn(label: Text('No Perkara')),
+                DataColumn(label: Text('Ruang')),
+              ],
+              rows: List<DataRow>.generate(
+                fakeSchedule.length,
+                (i) {
+                  final ScheduleModel s = fakeSchedule[i];
+                  return DataRow(
+                      onSelectChanged: (bool selected) {
+                        if (selected) {
+                          Navigator.pushNamed(context, ScheduleDetail.path,
+                              arguments: ScheduleDetailArgument(s));
+                        }
+                      },
+                      cells: [
+                        DataCell(Text('${i + 1}')),
+                        DataCell(Text('${DateFormat.getDefDate(s.startDate)}')),
+                        DataCell(Text('${s.caseId}')),
+                        DataCell(Text('${s.room}')),
+                      ]);
+                },
               ),
             ),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                      title: Text('Jadwal 2'),
-                      subtitle: Text('5 Desember 2020')),
-                ],
-              ),
-            ),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                      title: Text('Jadwal 3'),
-                      subtitle: Text('15 Desember 2020')),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

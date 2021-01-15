@@ -1,18 +1,44 @@
 import 'package:flutter/material.dart';
 
-import 'package:tugas_app/helpers/Routing.dart';
-
-import 'package:tugas_app/screens/home/Profile.dart';
-
-import 'package:tugas_app/screens/home/Schedule.dart';
+import 'package:tugas_app/screens/Landing.dart';
 import 'package:tugas_app/screens/home/Submission.dart';
+import 'package:tugas_app/screens/home/Schedule.dart';
 
 class Home extends StatelessWidget {
+  static const path = '/home';
+
   @override
   Widget build(BuildContext context) {
+    Future<void> _showLogoutDialog() async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Keluar'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('Apakah anda yakin keluar aplikasi ?'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Ya'),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, Landing.path);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text("Home"),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -20,89 +46,56 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             );
           },
         ),
-        actions: <Widget>[
+        actions: [
           IconButton(
-              icon: const Icon(Icons.logout),
-              tooltip: 'Keluar',
-              onPressed: () {
-                Routing.clear(context);
-              }),
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              _showLogoutDialog();
+            },
+          ),
         ],
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'App',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
+            UserAccountsDrawerHeader(
+              accountName: Text('User Name'),
+              accountEmail: Text('username@email.com'),
+              currentAccountPicture: CircleAvatar(
+                child: FlutterLogo(size: 42.0),
               ),
             ),
             ListTile(
-              title: Text(
-                'Profile',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              title: Text('Pengajuan'),
               onTap: () {
-                Routing.lto(context, Profile());
+                Navigator.pushNamed(context, Submission.path);
               },
             ),
             ListTile(
-              title: Text(
-                'Bantuan',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              title: Text('Jadwal'),
+              onTap: () {
+                Navigator.pushNamed(context, Schedule.path);
+              },
             ),
             ListTile(
-              title: Text(
-                'Pengaturan',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              title: Text('Bantuan'),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('Pengaturan'),
+              onTap: () {},
             ),
           ],
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        child: ListView(
+      body: Container(
+        child: Column(
           children: <Widget>[
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  RaisedButton(
-                    onPressed: () {
-                      Routing.fto(context, Submission());
-                    },
-                    child: Text('Pengajuan'),
-                  )
-                ],
-              ),
-            ),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  RaisedButton(
-                    onPressed: () {
-                      Routing.lto(context, Schedule());
-                    },
-                    child: Text('Jadwal'),
-                  ),
-                ],
-              ),
-            ),
+            Text('Home page'),
           ],
         ),
       ),
